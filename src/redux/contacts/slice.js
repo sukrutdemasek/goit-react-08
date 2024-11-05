@@ -4,6 +4,7 @@ import {
   addContactAsync,
   deleteContactAsync,
 } from "./operations";
+import { logout } from "../auth/operations";
 
 export const contactsSlice = createSlice({
   name: "contacts",
@@ -32,6 +33,9 @@ export const contactsSlice = createSlice({
         state.items = state.items.filter(
           (contact) => contact.id !== action.payload
         );
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.items = [];
       });
   },
 });
